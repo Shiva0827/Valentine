@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chelle 💕 Be My Valentine</title>
+
+<style>
+  body {
+    font-family: "Georgia", serif;
+    background:
+      linear-gradient(rgba(255,240,245,0.85), rgba(255,240,245,0.85)),
+      url("https://images.unsplash.com/photo-1502602898657-3e91760cbb34");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    overflow: hidden;
+    margin: 0;
+    padding-top: 120px;
+  }
+
+  h1 {
+    color: #8b1e3f;
+    font-size: 28px;
+    padding: 0 20px;
+  }
+
+  p {
+    color: #5f0f40;
+    font-size: 18px;
+    padding: 0 25px;
+    margin-top: 15px;
+  }
+
+  button {
+    font-size: 20px;
+    padding: 14px 32px;
+    border-radius: 30px;
+    border: none;
+    margin: 20px;
+    cursor: pointer;
+  }
+
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
+
+  #noBtn {
+    background: #adb5bd;
+    color: white;
+    position: absolute;
+  }
+
+  .heart {
+    position: absolute;
+    opacity: 0.7;
+    pointer-events: none;
+    animation: float 6s linear infinite;
+  }
+
+  @keyframes float {
+    from { transform: translateY(0); opacity: 0.7; }
+    to { transform: translateY(-800px); opacity: 0; }
+  }
+
+  /* Tap-to-start overlay */
+  #overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,240,245,0.97);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    font-size: 22px;
+    color: #8b1e3f;
+    text-align: center;
+    padding: 30px;
+  }
+</style>
+</head>
+
+<body>
+
+<div id="overlay" onclick="startMusic()">
+  Tap to begin 💕<br><br>
+  <small>A little Paris romance awaits you</small>
+</div>
+
+<h1>Chelle… will you be my Valentine? 💖</h1>
+
+<p>
+  Every day with you feels a little more magical —<br>
+  like stolen smiles, quiet laughs, and moments<br>
+  I never want to end.
+</p>
+
+<button id="yesBtn" onclick="sayLove()">Yes 💕</button>
+<button id="noBtn" onmouseover="moveNo()">No 😐</button>
+
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_1b58b9c7c1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let noCount = 0;
+
+// Start background music
+function startMusic() {
+  document.getElementById("bgMusic").play();
+  document.getElementById("overlay").style.display = "none";
+}
+
+// Floating hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💗";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.fontSize = Math.random() * 22 + 14 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 350);
+
+// No button teasing
+function moveNo() {
+  const noBtn = document.getElementById("noBtn");
+  noCount++;
+
+  if (noCount === 3) noBtn.innerText = "Are you sure? 😏";
+  if (noCount === 6) noBtn.innerText = "Chelleee 😳";
+  if (noCount === 9) noBtn.innerText = "Paris says yes 😌";
+
+  noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+  noBtn.style.top = Math.random() * (window.innerHeight - 120) + "px";
+}
+
+// Yes button action
+function sayLove() {
+  alert("🎉 SHE SAID YES!!! 🎉");
+
+  document.body.innerHTML = `
+    <h1 style="margin-top:160px; color:#8b1e3f;">
+      Chelle ❤️<br><br>
+      Thank you for being my favorite person,<br>
+      my safest place, and my greatest adventure.<br><br>
+      I choose you — today, tomorrow,<br>
+      and every Valentine after this 💘<br><br>
+      — Chait
+    </h1>
+  `;
+}
+</script>
+
+</body>
+</html>
