@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chelle 💕 Be My Valentine</title>
+
+<style>
+  body {
+    font-family: "Georgia", serif;
+    background: linear-gradient(to bottom, #fff0f5, #ffe6f0);
+    text-align: center;
+    overflow: hidden;
+    margin: 0;
+    padding-top: 120px;
+  }
+
+  h1 {
+    color: #c9184a;
+    font-size: 28px;
+    padding: 0 20px;
+  }
+
+  button {
+    font-size: 20px;
+    padding: 14px 30px;
+    border-radius: 30px;
+    border: none;
+    margin: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  }
+
+  #yesBtn:hover {
+    transform: scale(1.08);
+  }
+
+  #noBtn {
+    background: #adb5bd;
+    color: white;
+    position: absolute;
+  }
+
+  .heart {
+    position: absolute;
+    color: #ff4d6d;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    to {
+      transform: translateY(-800px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Chelle… will you be my Valentine? 💕🥺</h1>
+
+<button id="yesBtn" onclick="sayLove()">Yes 💖</button>
+<button id="noBtn" onmouseover="moveNo()">No 😐</button>
+
+<audio id="loveSound">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6c1b5b4e7b.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let noCount = 0;
+
+// Floating hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💗";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 350);
+
+// No button logic
+function moveNo() {
+  const noBtn = document.getElementById("noBtn");
+  noCount++;
+
+  if (noCount === 3) noBtn.innerText = "Are you sure? 😏";
+  if (noCount === 6) noBtn.innerText = "Chelleee 😳";
+  if (noCount === 9) noBtn.innerText = "Nice try 😂";
+
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 120);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+// Yes button
+function sayLove() {
+  document.getElementById("loveSound").play();
+  alert("🎉 YES!!! Chelle is my Valentine!!! 🎉");
+
+  document.body.innerHTML = `
+    <h1 style="margin-top:180px; color:#c9184a;">
+      Love you, Chelle ❤️🥰<br><br>
+      Forever & always 💘
+    </h1>
+  `;
+}
+</script>
+
+</body>
+</html>
